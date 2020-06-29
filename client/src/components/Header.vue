@@ -193,9 +193,9 @@ export default {
           link: "About",
         },
         {
-          name: "Contact",
+          name: "Colliveries",
           icon: "fas fa-paper-plane",
-          link: "Contact",
+          link: this.$store.state.currentUser == undefined?  "Home" :"AllApplicationsPage",
         },
       ],
       loginButton: {
@@ -232,13 +232,9 @@ export default {
       } else return "Home";
     },
     checkLoginPressed(name) {
-      if (name === "دخول") {
-        if (this.$vuetify.breakpoint.mdAndUp) {
-          this.pressLogin(true);
-        } else {
-          if (this.$route.name !== "SignIn")
-            this.$router.push({ name: "SignIn" });
-        }
+      if (name === "Log In") {
+        if (this.$route.name !== "SignIn")
+          this.$router.push({ name: "SignIn" });
       }
     },
     checkSignUpPressed() {
@@ -248,7 +244,7 @@ export default {
       if (link === this.$route.name) {
         if (
           name === "Home" ||
-          name === "Contact" ||
+          name === "Colliveries" ||
           name === "About" ||
           name === "Log In" ||
           name === "Join Us"
@@ -267,6 +263,7 @@ export default {
     },
     logOut() {
       this.storage.clear();
+      this.$store.state.currentUser = undefined;
       this.$router.replace({ name: "Home" });
       this.$router.go();
     },
